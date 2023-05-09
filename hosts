@@ -1,0 +1,8 @@
+[webservers]
+172.31.30.145
+172.31.85.106
+
+[appservers]
+172.31.30.126
+
+localhost

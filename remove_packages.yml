@@ -1,0 +1,16 @@
+---
+- name: uninstall multiple packages
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  tasks:
+  - name: uninstall packages
+    yum: 
+      name: "{{ item.pkg }}"
+      state: "{{ item.setup }}"
+
+    loops:
+       - { pkg: 'wget', setup: 'removed' }
+       - { pkg: 'tree', setup: 'absent' }
+
