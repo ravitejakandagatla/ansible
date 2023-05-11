@@ -1,0 +1,37 @@
+---
+- name: playbook to install apache tomcat
+  hosts: webservers
+  become: true
+  gather_facts: yes
+
+  tasks:
+  - name: downloading tomcat packages
+    get_url: 
+      url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz
+      dest: /opt
+      mode: 0755
+
+  - name: extract packages
+    unarchive:
+        src: /opt/apache-tomcat-9.0.75.tar.gz
+        dest: /opt
+        remote_src: yes
+
+  - name: change permissions on apache-tomcat file
+    file:
+      path: /opt/apache-tomcat-9.0.75 
+      mode: 0755
+      recurse: yes  
+
+  - name: creating link file for tomcat startup.sh
+    file:
+      src: /opt/apache-tomcat-9.0.75/bin/startup.sh
+      dest: /usr/local/bin/tomcatup
+
+  - name: creating link file for tomcat shutdown.sh file
+    file: 
+      src: /opt/apache-tomcat-9.0.75/bin/shutdown.sh
+      dest: /usr/local/bin/tomcatdown
+
+  - name: start the services
+    command: nohup startup    
