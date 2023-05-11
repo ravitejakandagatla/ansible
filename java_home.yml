@@ -1,0 +1,7 @@
+---
+- name: creating home folder for java
+  hosts: all
+  gather_facts: no
+  environment:
+    JAVA_HOME: /home/ansadmin/playbooks/jre
+
