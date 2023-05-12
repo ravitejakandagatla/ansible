@@ -1,0 +1,12 @@
+---
+- name: cloning repo
+  hosts: webservers
+  gather_facts: no
+  vars_files:
+    - vault2.yml
+
+  tasks:
+  - name: cloning repo  
+    git:
+      repo: https://ravitejakandagatla:{{ git_password }}@github.com/ravitejakandagatla/vaulttest.git
+      dest: /home/ansadmin/vaulttest  
